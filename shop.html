@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greenmart</title>
+    <link rel="shortcut icon" href="img/navlogo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Header/Navigation -->
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="img/navlogo.png" alt=""></a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#" class="active">Shop</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <button id="search-btn"><i class="fas fa-search"></i></button>
+            <button id="cart-btn"><i class="fas fa-shopping-cart"></i> <span class="cart-count">0</span></button>
+            <button id="user-btn"><i class="fas fa-user"></i></button>
+            <button class="button" id="open-menu-btn"><i class="fa-solid fa-bars"></i></button>
+            <button class="button" id="close-menu-btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+    </header>
+
+    <!-- Search Modal -->
+    <div id="search-modal" class="modal">
+        <div class="modal-content">
+            <span class="close"><i class="fa-solid fa-circle-xmark"></i></span>
+            <input type="text" placeholder="Search for products..." id="search-input">
+            <button id="search-submit">Search</button>
+        </div>
+    </div>
+
+    <!-- User Modal (Login/Signup/Profile) -->
+    <div id="user-modal" class="modal">
+        <div class="modal-content">
+            <span class="close"><i class="fa-solid fa-circle-xmark"></i></span>
+            <div id="login-form">
+                <h2>Login</h2>
+                <input type="email" placeholder="Email" id="login-email">
+                <input type="password" placeholder="Password" id="login-password">
+                <button id="login-submit">Login</button>
+                <p>Don't have an account? <a href="#" id="show-signup">Sign up</a></p>
+            </div>
+            <div id="signup-form" style="display: none;">
+                <h2>Sign Up</h2>
+                <input type="text" placeholder="Full Name" id="signup-name">
+                <input type="email" placeholder="Email" id="signup-email">
+                <input type="password" placeholder="Password" id="signup-password">
+                <input type="password" placeholder="Confirm Password" id="signup-confirm">
+                <button id="signup-submit">Sign Up</button>
+                <p>Already have an account? <a href="#" id="show-login">Login</a></p>
+            </div>
+            <div id="profile-info" style="display: none;">
+                <h2>My Profile</h2>
+                <p><strong>Name:</strong> <span id="profile-name"></span></p>
+                <p><strong>Email:</strong> <span id="profile-email"></span></p>
+                <button id="logout-btn">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close"><i class="fa-solid fa-circle-xmark"></i></span>
+            <h2>Your Cart</h2>
+            <div id="cart-items">
+                <!-- Cart items will be added here dynamically -->
+                <p id="empty-cart-message">Your cart is empty</p>
+            </div>
+            <div id="cart-total" style="display: none;">
+                <p><strong>Total:</strong> $<span id="total-amount">0.00</span></p>
+                <button id="checkout-btn">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shop Body Section -->
+    <section class="shop-container">
+        <div class="shop-header">
+            <h1 class="shop-title">Our Products</h1>
+            <div class="search-box">
+                <input type="text" placeholder="Search fruits, dairy, etc...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+
+        <div class="category-tabs">
+            <div class="category-tab active" data-category="all">All</div>
+            <div class="category-tab" data-category="fruits">Fruits</div>
+            <div class="category-tab" data-category="vegetables">Vegetables</div>
+            <div class="category-tab" data-category="dairy">Dairy</div>
+            <div class="category-tab" data-category="fish">Fish</div>
+            <div class="category-tab" data-category="meat">Meat</div>
+        </div>
+
+        <h2>Fruits</h2>
+        <div class="products-grid">
+            <div class="product-item">
+                <img src="img/apple.jpg" alt="Apple" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Fruits</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Apple</h3>
+                        <p class="product-price">$1.20</p>
+                    </div>
+                    <button class="add-to-cart" data-id="1" data-name="Apple" data-price="1.20">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/banana.jpeg" alt="Banana" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Fruits</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Banana</h3>
+                        <p class="product-price">$0.50</p>
+                    </div>
+                    <button class="add-to-cart" data-id="2" data-name="Banana" data-price="0.50">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/orange.jpeg" alt="Orange" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Fruits</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Orange</h3>
+                        <p class="product-price">$0.80</p>
+                    </div>
+                    <button class="add-to-cart" data-id="3" data-name="Orange" data-price="0.80">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/Mango.jpeg" alt="Mango" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Fruits</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Mango</h3>
+                        <p class="product-price">$1.50</p>
+                    </div>
+                    <button class="add-to-cart" data-id="4" data-name="Mango" data-price="1.50">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/grapes.jpeg" alt="Grapes" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Fruits</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Grapes</h3>
+                        <p class="product-price">$2.00</p>
+                    </div>
+                    <button class="add-to-cart" data-id="5" data-name="Grapes" data-price="2.00">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <h2>Vegetables</h2>
+        <div class="products-grid">
+            <div class="product-item">
+                <img src="img/potato.jpg" alt="Potato" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Vegetables</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Potato</h3>
+                        <p class="product-price">$0.40</p>
+                    </div>
+                    <button class="add-to-cart" data-id="6" data-name="Potato" data-price="0.40">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/tomato.jpg" alt="Tomato" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Vegetables</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Tomato</h3>
+                        <p class="product-price">$0.60</p>
+                    </div>
+                    <button class="add-to-cart" data-id="7" data-name="Tomato" data-price="0.60">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/cabbage.jpeg" alt="Cabbage" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Vegetables</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Cabbage</h3>
+                        <p class="product-price">$1.00</p>
+                    </div>
+                    <button class="add-to-cart" data-id="8" data-name="Cabbage" data-price="1.00">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/carrot.webp" alt="Carrot" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Vegetables</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Carrot</h3>
+                        <p class="product-price">$0.70</p>
+                    </div>
+                    <button class="add-to-cart" data-id="9" data-name="Carrot" data-price="0.70">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/broccli.jpeg" alt="Broccoli" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Vegetables</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Broccoli</h3>
+                        <p class="product-price">$1.30</p>
+                    </div>
+                    <button class="add-to-cart" data-id="10" data-name="Broccoli" data-price="1.30">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <h2>Dairy</h2>
+        <div class="products-grid">
+            <div class="product-item">
+                <img src="img/milk.jpg" alt="Milk" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Dairy</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Milk</h3>
+                        <p class="product-price">$1.50</p>
+                    </div>
+                    <button class="add-to-cart" data-id="11" data-name="Milk" data-price="1.50">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/cheese.jpg" alt="Cheese" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Dairy</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Cheese</h3>
+                        <p class="product-price">$2.50</p>
+                    </div>
+                    <button class="add-to-cart" data-id="12" data-name="Cheese" data-price="2.50">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/yogurt.jpg" alt="Yogurt" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Dairy</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Yogurt</h3>
+                        <p class="product-price">$1.20</p>
+                    </div>
+                    <button class="add-to-cart" data-id="13" data-name="Yogurt" data-price="1.20">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/butter.avif" alt="Butter" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Dairy</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Butter</h3>
+                        <p class="product-price">$2.20</p>
+                    </div>
+                    <button class="add-to-cart" data-id="14" data-name="Butter" data-price="2.20">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/cream.jpg" alt="Cream" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Dairy</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Cream</h3>
+                        <p class="product-price">$1.80</p>
+                    </div>
+                    <button class="add-to-cart" data-id="15" data-name="Cream" data-price="1.80">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <h2>Fish</h2>
+        <div class="products-grid">
+            <div class="product-item">
+                <img src="img/salmon.jpeg" alt="Salmon" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Fish</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Salmon</h3>
+                        <p class="product-price">$4.00</p>
+                    </div>
+                    <button class="add-to-cart" data-id="16" data-name="Salmon" data-price="4.00">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/tuna.jpg" alt="Tuna" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Fish</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Tuna</h3>
+                        <p class="product-price">$3.50</p>
+                    </div>
+                    <button class="add-to-cart" data-id="17" data-name="Tuna" data-price="3.50">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/ilisha.jpg" alt="Ilisha Fish" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Fish</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Ilisha Fish</h3>
+                        <p class="product-price">$5.00</p>
+                    </div>
+                    <button class="add-to-cart" data-id="18" data-name="Ilisha Fish" data-price="5.00">Add to
+                        Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/Rui.jpg" alt="Rui Fish" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Fish</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Rui Fish</h3>
+                        <p class="product-price">$3.80</p>
+                    </div>
+                    <button class="add-to-cart" data-id="19" data-name="Rui Fish" data-price="3.80">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/sardine.jpg" alt="Sardine" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Fish</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Sardine</h3>
+                        <p class="product-price">$2.50</p>
+                    </div>
+                    <button class="add-to-cart" data-id="20" data-name="Sardine" data-price="2.50">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <h2>Meat</h2>
+        <div class="products-grid">
+            <div class="product-item">
+                <img src="img/chicken.jpg" alt="Chicken" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Meat</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Chicken</h3>
+                        <p class="product-price">$3.00</p>
+                    </div>
+                    <button class="add-to-cart" data-id="21" data-name="Chicken" data-price="3.00">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/beef.jpg" alt="Beef" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Meat</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Beef</h3>
+                        <p class="product-price">$5.00</p>
+                    </div>
+                    <button class="add-to-cart" data-id="22" data-name="Beef" data-price="5.00">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/mutton.jpg" alt="Mutton" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Meat</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Mutton</h3>
+                        <p class="product-price">$6.50</p>
+                    </div>
+                    <button class="add-to-cart" data-id="23" data-name="Mutton" data-price="6.50">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/turky.jpeg" alt="Turkey" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Meat</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Turkey</h3>
+                        <p class="product-price">$4.50</p>
+                    </div>
+                    <button class="add-to-cart" data-id="24" data-name="Turkey" data-price="4.50">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/duck.jpeg" alt="Duck" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Meat</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Duck</h3>
+                        <p class="product-price">$4.80</p>
+                    </div>
+                    <button class="add-to-cart" data-id="25" data-name="Duck" data-price="4.80">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sale-products" id="sale-products">
+        <div class="shop-header">
+            <h2 class="shop-title">Special Offers</h2>
+        </div>
+
+        <div class="products-grid">
+            <!-- Strawberry -->
+            <div class="product-item sale-item">
+                <div class="sale-badge">25% OFF</div>
+                <img src="img/strawberry.jpeg" alt="Strawberry" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Fruits</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Strawberry</h3>
+                        <div class="price-container">
+                            <p class="original-price">$3.20</p>
+                            <p class="product-price">$2.40</p>
+                        </div>
+                    </div>
+                    <button class="add-to-cart" data-id="26" data-name="Strawberry" data-price="2.40">Add to
+                        Cart</button>
+                </div>
+            </div>
+
+            <!-- Pineapple -->
+            <div class="product-item sale-item">
+                <div class="sale-badge">20% OFF</div>
+                <img src="img/pineapple.jpeg" alt="Pineapple" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Fruits</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Pineapple</h3>
+                        <div class="price-container">
+                            <p class="original-price">$2.75</p>
+                            <p class="product-price">$2.20</p>
+                        </div>
+                    </div>
+                    <button class="add-to-cart" data-id="27" data-name="Pineapple" data-price="2.20">Add to
+                        Cart</button>
+                </div>
+            </div>
+
+            <!-- Cucumber -->
+            <div class="product-item sale-item">
+                <div class="sale-badge">15% OFF</div>
+                <img src="img/cucamber.jpeg" alt="Cucumber" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Vegetables</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Cucumber</h3>
+                        <div class="price-container">
+                            <p class="original-price">$1.10</p>
+                            <p class="product-price">$0.94</p>
+                        </div>
+                    </div>
+                    <button class="add-to-cart" data-id="28" data-name="Cucumber" data-price="0.94">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Onion -->
+            <div class="product-item sale-item">
+                <div class="sale-badge">30% OFF</div>
+                <img src="img/onion.webp" alt="Onion" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Vegetables</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Onion</h3>
+                        <div class="price-container">
+                            <p class="original-price">$0.80</p>
+                            <p class="product-price">$0.56</p>
+                        </div>
+                    </div>
+                    <button class="add-to-cart" data-id="29" data-name="Onion" data-price="0.56">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Eggs -->
+            <div class="product-item sale-item">
+                <div class="sale-badge">10% OFF</div>
+                <img src="img/eggs.jpeg" alt="Eggs" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Dairy</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Eggs</h3>
+                        <div class="price-container">
+                            <p class="original-price">$2.50</p>
+                            <p class="product-price">$2.25</p>
+                        </div>
+                    </div>
+                    <button class="add-to-cart" data-id="30" data-name="Eggs" data-price="2.25">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Whipped Cream -->
+            <div class="product-item sale-item">
+                <div class="sale-badge">20% OFF</div>
+                <img src="img/wippedcream.jpeg" alt="Whipped Cream" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Dairy</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Whipped Cream</h3>
+                        <div class="price-container">
+                            <p class="original-price">$3.00</p>
+                            <p class="product-price">$2.40</p>
+                        </div>
+                    </div>
+                    <button class="add-to-cart" data-id="31" data-name="Whipped Cream" data-price="2.40">Add to
+                        Cart</button>
+                </div>
+            </div>
+
+            <!-- Cod -->
+            <div class="product-item sale-item">
+                <div class="sale-badge">25% OFF</div>
+                <img src="img/cod.jpg" alt="Cod" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Fish</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Cod</h3>
+                        <div class="price-container">
+                            <p class="original-price">$5.50</p>
+                            <p class="product-price">$4.13</p>
+                        </div>
+                    </div>
+                    <button class="add-to-cart" data-id="32" data-name="Cod" data-price="4.13">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Shrimp -->
+            <div class="product-item sale-item">
+                <div class="sale-badge">15% OFF</div>
+                <img src="img/shrimp.jpg" alt="Shrimp" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Fish</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Shrimp</h3>
+                        <div class="price-container">
+                            <p class="original-price">$7.00</p>
+                            <p class="product-price">$5.95</p>
+                        </div>
+                    </div>
+                    <button class="add-to-cart" data-id="33" data-name="Shrimp" data-price="5.95">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Lamb -->
+            <div class="product-item sale-item">
+                <div class="sale-badge">30% OFF</div>
+                <img src="img/lamb.jpg" alt="Lamb" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Meat</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Lamb</h3>
+                        <div class="price-container">
+                            <p class="original-price">$8.00</p>
+                            <p class="product-price">$5.60</p>
+                        </div>
+                    </div>
+                    <button class="add-to-cart" data-id="34" data-name="Lamb" data-price="5.60">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Deer -->
+            <div class="product-item sale-item">
+                <div class="sale-badge">40% OFF</div>
+                <img src="img/deer.jpg" alt="Deer" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Meat</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Deer</h3>
+                        <div class="price-container">
+                            <p class="original-price">$10.00</p>
+                            <p class="product-price">$6.00</p>
+                        </div>
+                    </div>
+                    <button class="add-to-cart" data-id="35" data-name="Deer" data-price="6.00">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <a href="index.html"><img src="img/navlogo.png" alt=""></a>
+                <p>Best Organic Food Shop</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: mahdihaque.24@gmail.com</p>
+                <p>Phone: +880 1310 692122</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Created by <a href="https://tahmid-haque-portfolio.netlify.app/">Tahmid Haque</a> | All right
+                resurved </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greenmart</title>
+    <link rel="shortcut icon" href="img/navlogo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Header/Navigation -->
+    <header>
+        <div class="logo">
+            <a href="#"><img src="img/navlogo.png" alt=""></a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <button id="search-btn"><i class="fas fa-search"></i></button>
+            <button id="cart-btn"><i class="fas fa-shopping-cart"></i> <span class="cart-count">0</span></button>
+            <button id="user-btn"><i class="fas fa-user"></i></button>
+            <button class="button" id="open-menu-btn"><i class="fa-solid fa-bars"></i></button>
+            <button class="button" id="close-menu-btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+    </header>
+
+    <!-- Search Modal -->
+    <div id="search-modal" class="modal">
+        <div class="modal-content">
+            <span class="close"><i class="fa-solid fa-circle-xmark"></i></span>
+            <input type="text" placeholder="Search for products..." id="search-input">
+            <button id="search-submit">Search</button>
+        </div>
+    </div>
+
+    <!-- User Modal (Login/Signup/Profile) -->
+    <div id="user-modal" class="modal">
+        <div class="modal-content">
+            <span class="close"><i class="fa-solid fa-circle-xmark"></i></span>
+            <div id="login-form">
+                <h2>Login</h2>
+                <input type="email" placeholder="Email" id="login-email">
+                <input type="password" placeholder="Password" id="login-password">
+                <button id="login-submit">Login</button>
+                <p>Don't have an account? <a href="#" id="show-signup">Sign up</a></p>
+            </div>
+            <div id="signup-form" style="display: none;">
+                <h2>Sign Up</h2>
+                <input type="text" placeholder="Full Name" id="signup-name">
+                <input type="email" placeholder="Email" id="signup-email">
+                <input type="password" placeholder="Password" id="signup-password">
+                <input type="password" placeholder="Confirm Password" id="signup-confirm">
+                <button id="signup-submit">Sign Up</button>
+                <p>Already have an account? <a href="#" id="show-login">Login</a></p>
+            </div>
+            <div id="profile-info" style="display: none;">
+                <h2>My Profile</h2>
+                <p><strong>Name:</strong> <span id="profile-name"></span></p>
+                <p><strong>Email:</strong> <span id="profile-email"></span></p>
+                <button id="logout-btn">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close"><i class="fa-solid fa-circle-xmark"></i></span>
+            <h2>Your Cart</h2>
+            <div id="cart-items">
+                <!-- Cart items will be added here dynamically -->
+                <p id="empty-cart-message">Your cart is empty</p>
+            </div>
+            <div id="cart-total" style="display: none;">
+                <p><strong>Total:</strong> $<span id="total-amount">0.00</span></p>
+                <button id="checkout-btn">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-image-container">
+            <img src="img/logo.jpg" alt="Greenmart Fresh Produce" class="hero-logo">
+        </div>
+        <div class="hero-content">
+            <h2>Eat Fresh, Live Better</h2>
+            <p>Farm-fresh fruits, vegetables, dairy, seafood, and premium meats all at unbeatable prices!</p>
+            <a href="shop.html"><button class="shop-now-btn">Shop Now</button></a>
+        </div>
+    </section>
+
+    <!-- Featured Categories -->
+    <section class="categories" id="categories">
+        <h2>Featured Categories</h2>
+        <div class="categories-container">
+            <div class="category-card">
+                <img src="img/fruits.pjpeg" alt="Fruits">
+                <h3>Fruits</h3>
+            </div>
+            <div class="category-card">
+                <img src="img/vagitable.jpg" alt="Vegetables">
+                <h3>Vegetables</h3>
+            </div>
+            <div class="category-card">
+                <img src="img/dairy.avif" alt="Dairy">
+                <h3>Dairy</h3>
+            </div>
+            <div class="category-card">
+                <img src="img/fish.jpg" alt="Bakery">
+                <h3>Fish</h3>
+            </div>
+            <div class="category-card">
+                <img src="img/meat.jpeg" alt="Bakery">
+                <h3>Meat</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured">
+        <h2>Featured Products</h2>
+        <div class="products-grid">
+            <div class="product-item">
+                <img src="img/apple.jpg" alt="Apple" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Fruits</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Apple</h3>
+                        <p class="product-price">$1.20</p>
+                    </div>
+                    <button class="add-to-cart" data-id="1" data-name="Apple" data-price="1.20">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/banana.jpeg" alt="Banana" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Fruits</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Banana</h3>
+                        <p class="product-price">$0.50</p>
+                    </div>
+                    <button class="add-to-cart" data-id="2" data-name="Banana" data-price="0.50">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/potato.jpg" alt="Potato" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Vegetables</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Potato</h3>
+                        <p class="product-price">$0.40</p>
+                    </div>
+                    <button class="add-to-cart" data-id="6" data-name="Potato" data-price="0.40">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/tomato.jpg" alt="Tomato" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Vegetables</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Tomato</h3>
+                        <p class="product-price">$0.60</p>
+                    </div>
+                    <button class="add-to-cart" data-id="7" data-name="Tomato" data-price="0.60">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/milk.jpg" alt="Milk" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Dairy</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Milk</h3>
+                        <p class="product-price">$1.50</p>
+                    </div>
+                    <button class="add-to-cart" data-id="11" data-name="Milk" data-price="1.50">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/cheese.jpg" alt="Cheese" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Dairy</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Cheese</h3>
+                        <p class="product-price">$2.50</p>
+                    </div>
+                    <button class="add-to-cart" data-id="12" data-name="Cheese" data-price="2.50">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/ilisha.jpg" alt="Ilisha Fish" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Fish</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Ilisha Fish</h3>
+                        <p class="product-price">$5.00</p>
+                    </div>
+                    <button class="add-to-cart" data-id="18" data-name="Ilisha Fish" data-price="5.00">Add to
+                        Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/Rui.jpg" alt="Rui Fish" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Fish</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Rui Fish</h3>
+                        <p class="product-price">$3.80</p>
+                    </div>
+                    <button class="add-to-cart" data-id="19" data-name="Rui Fish" data-price="3.80">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/chicken.jpg" alt="Chicken" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Meat</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Chicken</h3>
+                        <p class="product-price">$3.00</p>
+                    </div>
+                    <button class="add-to-cart" data-id="21" data-name="Chicken" data-price="3.00">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="img/beef.jpg" alt="Beef" class="product-image">
+                <div class="product-info">
+                    <span class="product-category">Meat</span>
+                    <div class="product-details">
+                        <h3 class="product-name">Beef</h3>
+                        <p class="product-price">$5.00</p>
+                    </div>
+                    <button class="add-to-cart" data-id="22" data-name="Beef" data-price="5.00">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+        <a href="shop.html"><button class="show-more-btn">Show more <i class="fas fa-arrow-right"></i></button></a>
+    </section>
+
+    <!-- Sale Banner Section -->
+    <section class="sale-banner">
+        <div class="sale-container">
+            <div class="sale-content">
+                <span class="sale-badge">Limited Time Offer</span>
+                <h2>Organic Harvest Sale</h2>
+                <p class="sale-subtitle">Enjoy great discounts on all fresh produce, dairy, and premium meats</p>
+                <div class="sale-countdown">
+                    <div class="countdown-box">
+                        <span id="days">00</span>
+                        <small>Days</small>
+                    </div>
+                    <div class="countdown-box">
+                        <span id="hours">00</span>
+                        <small>Hours</small>
+                    </div>
+                    <div class="countdown-box">
+                        <span id="minutes">00</span>
+                        <small>Mins</small>
+                    </div>
+                    <div class="countdown-box">
+                        <span id="seconds">00</span>
+                        <small>Secs</small>
+                    </div>
+                </div>
+                <a href="shop.html#sale-products" class="sale-btn">Shop the Sale <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="sale-image">
+                <img src="img/salebanner.jpeg" alt="">
+            </div>
+        </div>
+    </section>
+
+    <section class="faqs">
+        <h2>Frequently Asked Questions</h2>
+        <div class="container faqs_container">
+            <articl class="faq">
+                <div class="faq_icon"><i class="fa-solid fa-angle-down"></i></div>
+                <div class="qus_ans">
+                    <h4>Are your fruits and vegetables organic?</h4>
+                    <p>
+                        Yes! We offer both organic and conventionally grown options. Look for the "Certified Organic"
+                        label on product pages or in-store displays.
+                    </p>
+                </div>
+            </articl>
+            <articl class="faq">
+                <div class="faq_icon"><i class="fa-solid fa-angle-down"></i></div>
+                <div class="qus_ans">
+                    <h4>How often do you restock fresh produce?</h4>
+                    <p>
+                        We restock daily to ensure maximum freshness. Our busiest restock days are Monday, Wednesday,
+                        and Friday mornings.
+                    </p>
+                </div>
+            </articl>
+            <articl class="faq">
+                <div class="faq_icon"><i class="fa-solid fa-angle-down"></i></div>
+                <div class="qus_ans">
+                    <h4>Where do you source your meat and fish?</h4>
+                    <p>
+                        We partner with local farms for meat (within 100 miles) and trusted sustainable fisheries for
+                        seafood. All sources meet strict quality standards.
+                    </p>
+                </div>
+            </articl>
+            <articl class="faq">
+                <div class="faq_icon"><i class="fa-solid fa-angle-down"></i></div>
+                <div class="qus_ans">
+                    <h4>Do you offer dairy alternatives?</h4>
+                    <p>
+                        Absolutely! We carry almond, oat, soy, and coconut milk options, plus vegan cheeses and yogurts
+                        in our dairy section.
+                    </p>
+                </div>
+            </articl>
+            <articl class="faq">
+                <div class="faq_icon"><i class="fa-solid fa-angle-down"></i></div>
+                <div class="qus_ans">
+                    <h4>How can I check if a product is in stock?</h4>
+                    <p>
+                        Use our website's "Check Store Availability" feature or call your local store. We update
+                        inventory in real-time.
+                    </p>
+                </div>
+            </articl>
+            <articl class="faq">
+                <div class="faq_icon"><i class="fa-solid fa-angle-down"></i></div>
+                <div class="qus_ans">
+                    <h4>What's your return policy for perishable items?</h4>
+                    <p>
+                        We accept returns within 24 hours with a receipt if the product is unopened and properly
+                        chilled. Frozen items must be returned frozen.
+                    </p>
+                </div>
+            </articl>
+            <articl class="faq">
+                <div class="faq_icon"><i class="fa-solid fa-angle-down"></i></div>
+                <div class="qus_ans">
+                    <h4>Do you sell frozen fruits/vegetables?</h4>
+                    <p>
+                        Yes! Our frozen section includes flash-frozen produce picked at peak ripeness, with no
+                        additives.
+                    </p>
+                </div>
+            </articl>
+            <articl class="faq">
+                <div class="faq_icon"><i class="fa-solid fa-angle-down"></i></div>
+                <div class="qus_ans">
+                    <h4>How do you ensure meat/fish freshness?</h4>
+                    <p>
+                        1. Meat: Butchered daily, stored at 0-4°C <br>
+                        2. Delivered on ice within 24 hours of catch <br>
+                        3. Sell-by dates are clearly labeled
+                    </p>
+                </div>
+            </articl>
+            <articl class="faq">
+                <div class="faq_icon"><i class="fa-solid fa-angle-down"></i></div>
+                <div class="qus_ans">
+                    <h4>Do you offer discounts for bulk purchases?</h4>
+                    <p>
+                        We do! Ask about our case discounts (6+ units of the same item) and weekly "Buy More, Save More"
+                        deals on select products.
+                    </p>
+                </div>
+            </articl>
+            <articl class="faq">
+                <div class="faq_icon"><i class="fa-solid fa-angle-down"></i></div>
+                <div class="qus_ans">
+                    <h4>Can I pre-order seasonal items?</h4>
+                    <p>
+                        Yes! Contact our customer service to reserve seasonal specialties (like holiday turkeys or
+                        mangoes) in advance.
+                    </p>
+                </div>
+            </articl>
+        </div>
+    </section>
+
+
+    <section class="containter testimonials_container mySwiper">
+        <h2>Testimonnials</h2>
+        <div class="swiper-wrapper">
+            <artical class="testimonial swiper-slide">
+                <div class="avatar">
+                    <img src="img/rv1.jpeg" alt="">
+                </div>
+                <div class="testimonial_info">
+                    <h5> Sarah Johnson</h5>
+                    <small>Home Chef & Nutritionist</small>
+                </div>
+                <div class="testimonial_body">
+                    <p>
+                        "Greenmart has transformed my cooking! Their fresh organic vegetables arrive crisp and full of
+                        flavor. As a nutritionist, I appreciate their commitment to pesticide-free produce. The dairy
+                        selection is exceptional too - the milk tastes like it came straight from the farm!"
+                    </p>
+                </div>
+            </artical>
+            <artical class="testimonial swiper-slide">
+                <div class="avatar">
+                    <img src="img/rv2.jpg" alt="">
+                </div>
+                <div class="testimonial_info">
+                    <h5>Victor Roy</h5>
+                    <small>Restaurant Owner</small>
+                </div>
+                <div class="testimonial_body">
+                    <p>
+                        "My restaurant sources 80% of ingredients from Greenmart. Their fish is always fresh, and the
+                        meat quality surpasses local butchers. The convenience of scheduled deliveries helps me plan
+                        menus efficiently. A game-changer for food businesses!"
+                    </p>
+                </div>
+            </artical>
+            <artical class="testimonial swiper-slide">
+                <div class="avatar">
+                    <img src="img/rv3.jpg" alt="">
+                </div>
+                <div class="testimonial_info">
+                    <h5>Emily Rose</h5>
+                    <small>Busy Working Mom</small>
+                </div>
+                <div class="testimonial_body">
+                    <p>
+                        "Between work and kids, grocery shopping was stressful. Greenmart's pre-cut fruit boxes and
+                        vacuum-packed meats save me hours weekly! My kids love their sweet mangoes, and I love that
+                        everything stays fresh for days."
+                    </p>
+                </div>
+            </artical>
+            <artical class="testimonial swiper-slide">
+                <div class="avatar">
+                    <img src="img/rv4.jpg" alt="">
+                </div>
+                <div class="testimonial_info">
+                    <h5>Dr. Michael Okafor</h5>
+                    <small>Cardiologist & Health Advocate</small>
+                </div>
+                <div class="testimonial_body">
+                    <p>
+                        "Finally, an online market that understands healthy eating! Their organic meat section has
+                        grass-fed options perfect for heart-healthy diets. I recommend Greenmart to all my patients
+                        looking for quality proteins and fresh produce."
+                    </p>
+                </div>
+            </artical>
+            <artical class="testimonial swiper-slide">
+                <div class="avatar">
+                    <img src="img/rv5.jpg" alt="">
+                </div>
+                <div class="testimonial_info">
+                    <h5>Aisha Rahman</h5>
+                    <small>Fitness Trainer</small>
+                </div>
+                <div class="testimonial_body">
+                    <p>
+                        "As an athlete, I need clean protein sources. Greenmart's antibiotic-free chicken and
+                        wild-caught fish are staples in my meal prep. Their cold delivery ensures everything stays
+                        perfect. Best service in the city!"
+                    </p>
+                </div>
+            </artical>
+            <artical class="testimonial swiper-slide">
+                <div class="avatar">
+                    <img src="img/rv6.jpeg" alt="">
+                </div>
+                <div class="testimonial_info">
+                    <h5>David Karter</h5>
+                    <small>Vegan Lifestyle Blogger</small>
+                </div>
+                <div class="testimonial_body">
+                    <p>
+                        "I exclusively use Greenmart's organic fruits and veggies for our recipes. The seasonal boxes
+                        introduce us to new varieties I'll never find in supermarkets. Their eco-friendly packaging
+                        aligns with our zero-waste values too!"
+                    </p>
+                </div>
+            </artical>
+            <artical class="testimonial swiper-slide">
+                <div class="avatar">
+                    <img src="img/rv7.webp" alt="">
+                </div>
+                <div class="testimonial_info">
+                    <h5>Chef Marco Bianchi</h5>
+                    <small>Celebrity Chef & Cookbook Author</small>
+                </div>
+                <div class="testimonial_body">
+                    <p>
+                        "Professional kitchens need reliability Greenmart delivers (literally!). Their dairy products
+                        rival European quality, and the exotic fruits inspire my dessert menu. The personal account
+                        manager for bulk orders is a brilliant touch."
+                    </p>
+                </div>
+            </artical>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <a href="#"><img src="img/navlogo.png" alt=""></a>
+                <p>Best Organic Food Shop</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: mahdihaque.24@gmail.com</p>
+                <p>Phone: +880 1310 692122</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Created by <a href="https://tahmid-haque-portfolio.netlify.app/">Tahmid Haque</a> | All right
+                resurved </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

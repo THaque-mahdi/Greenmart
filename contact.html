@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greenmart</title>
+    <link rel="shortcut icon" href="img/navlogo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Header/Navigation -->
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="img/navlogo.png" alt=""></a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="#" class="active">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <button id="search-btn"><i class="fas fa-search"></i></button>
+            <button id="cart-btn"><i class="fas fa-shopping-cart"></i> <span class="cart-count">0</span></button>
+            <button id="user-btn"><i class="fas fa-user"></i></button>
+            <button class="button" id="open-menu-btn"><i class="fa-solid fa-bars"></i></button>
+            <button class="button" id="close-menu-btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+    </header>
+
+    <!-- Search Modal -->
+    <div id="search-modal" class="modal">
+        <div class="modal-content">
+            <span class="close"><i class="fa-solid fa-circle-xmark"></i></span>
+            <input type="text" placeholder="Search for products..." id="search-input">
+            <button id="search-submit">Search</button>
+        </div>
+    </div>
+
+    <!-- User Modal (Login/Signup/Profile) -->
+    <div id="user-modal" class="modal">
+        <div class="modal-content">
+            <span class="close"><i class="fa-solid fa-circle-xmark"></i></span>
+            <div id="login-form">
+                <h2>Login</h2>
+                <input type="email" placeholder="Email" id="login-email">
+                <input type="password" placeholder="Password" id="login-password">
+                <button id="login-submit">Login</button>
+                <p>Don't have an account? <a href="#" id="show-signup">Sign up</a></p>
+            </div>
+            <div id="signup-form" style="display: none;">
+                <h2>Sign Up</h2>
+                <input type="text" placeholder="Full Name" id="signup-name">
+                <input type="email" placeholder="Email" id="signup-email">
+                <input type="password" placeholder="Password" id="signup-password">
+                <input type="password" placeholder="Confirm Password" id="signup-confirm">
+                <button id="signup-submit">Sign Up</button>
+                <p>Already have an account? <a href="#" id="show-login">Login</a></p>
+            </div>
+            <div id="profile-info" style="display: none;">
+                <h2>My Profile</h2>
+                <p><strong>Name:</strong> <span id="profile-name"></span></p>
+                <p><strong>Email:</strong> <span id="profile-email"></span></p>
+                <button id="logout-btn">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close"><i class="fa-solid fa-circle-xmark"></i></span>
+            <h2>Your Cart</h2>
+            <div id="cart-items">
+                <!-- Cart items will be added here dynamically -->
+                <p id="empty-cart-message">Your cart is empty</p>
+            </div>
+            <div id="cart-total" style="display: none;">
+                <p><strong>Total:</strong> $<span id="total-amount">0.00</span></p>
+                <button id="checkout-btn">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="contact">
+        <div class="container contact_container">
+            <aside class="contact_aside">
+                <h2>Contact Us</h2>
+                <p>Contact us if you face any querys and our team will answer you soon. Thank you!
+                </p>
+                <ul class="contact_details">
+                    <li>
+                        <i class="fa-solid fa-phone"></i>
+                        <h5>+8801310692122</h5>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-envelope"></i>
+                        <h5>mahdihaque.24@gmail.com</h5>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-location-dot"></i>
+                        <h5>Sylhet, Bangladesh</h5>
+                    </li>
+                </ul>
+                <ul class="contact_socials">
+                    <li><a href="http://facebook.com" target="_blank"><i class="fa-brands fa-facebook"></i></a></li>
+                    <li><a href="http://instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+                    <li><a href="https://twitter.com/TahmidHaqu97852" target="_blank"><i
+                                class="fa-brands fa-twitter"></i></a></li>
+                    <li><a href="https://www.linkedin.com/in/tahmid-haque-7698a1258/" target="_blank"><i
+                                class="fa-brands fa-linkedin"></i></a></li>
+                </ul>
+            </aside>
+
+
+
+            <form action=" " method="post" class="contact_form">
+                <div class="form_name">
+                    <input type="text" name="First Name" Placeholder="First Name" required>
+                    <input type="text" name="Last Name" Placeholder="Last Name" required>
+                </div>
+                <input type="email" name="Email Address" placeholder="Your Email Address" required>
+                <textarea name="Massage" rows="7" placeholder="Massage" required></textarea>
+                <button type="submit" class="btn btn-primary">Send Massage</button>
+            </form>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <a href="index.html"><img src="img/navlogo.png" alt=""></a>
+                <p>Best Organic Food Shop</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: mahdihaque.24@gmail.com</p>
+                <p>Phone: +880 1310 692122</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Created by <a href="https://tahmid-haque-portfolio.netlify.app/">Tahmid Haque</a> | All right resurved </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
