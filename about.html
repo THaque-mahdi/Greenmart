@@ -14,24 +14,160 @@
     <!-- Header/Navigation (Same as index.html) -->
     <header>
         <div class="logo">
-            <a href="index.html"><img src="img/navlogo.png" alt=""></a>
+            <a href="#"><img src="img/navlogo.png" alt=""></a>
         </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="shop.html">Shop</a></li>
-                <li><a href="#" class="active">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="user-actions">
-            <button id="search-btn"><i class="fas fa-search"></i></button>
-            <button id="cart-btn"><i class="fas fa-shopping-cart"></i> <span class="cart-count">0</span></button>
-            <button id="user-btn"><i class="fas fa-user"></i></button>
-            <button class="button" id="open-menu-btn"><i class="fa-solid fa-bars"></i></button>
-            <button class="button" id="close-menu-btn"><i class="fa-solid fa-xmark"></i></button>
+        <div class="navbar">
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="#" class="active">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <button id="search-btn"><i class="fas fa-search"></i></button>
+                <button id="cart-btn"><i class="fas fa-shopping-cart"></i> <span class="cart-count">0</span></button>
+                <a href="login.html" class="login-btn">Login</a>
+                <button class="button" id="open-menu-btn"><i class="fa-solid fa-bars"></i></button>
+                <button class="button" id="close-menu-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
         </div>
     </header>
+
+     <!-- Search Modal -->
+    <div id="search-modal" class="modal">
+        <div class="modal-content">
+            <span class="close"><i class="fa-solid fa-circle-xmark"></i></span>
+            <input type="text" placeholder="Search for products..." id="search-input">
+            <button id="search-submit">Search</button>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close"><i class="fa-solid fa-circle-xmark"></i></span>
+            <h2>Your Cart</h2>
+            <div id="cart-items">
+                <!-- Cart items will be added here dynamically -->
+                <p id="empty-cart-message">Your cart is empty</p>
+            </div>
+            <div id="cart-total" style="display: none;">
+                <p><strong>Total:</strong> $<span id="total-amount">0.00</span></p>
+                <button id="checkout-btn">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Method Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content payment-modal-content">
+            <span class="close"><i class="fa-solid fa-circle-xmark"></i></span>
+
+            <h4>Choose your Payment Method</h4>
+
+            <div id="payment-methods">
+                <button onclick="selectMethod('visa')">Visa Card</button>
+                <button onclick="selectMethod('bkash')">bKash</button>
+                <button onclick="selectMethod('nagad')">Nagad</button>
+            </div>
+
+            <div id="visa-form" class="payment-form" style="display: none;">
+                <h2>Visa Payment</h2>
+
+                <div class="form-group">
+                    <label>Your Email</label>
+                    <input type="email" placeholder="Enter your email">
+                </div>
+
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" placeholder="Enter your name">
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter your password">
+                </div>
+
+                <div class="form-group">
+                    <label>Extra Info</label>
+                    <input type="text" placeholder="Any additional information">
+                </div>
+
+                <div class="payment-buttons">
+                <button id="submitPaymentBtn" class="submit-btn">Submit Payment</button>
+                <button id="cancelPaymentBtn" class="cancel-btn">Cancel</button>
+            </div>
+            </div>
+
+            <div id="bkash-form" class="payment-form" style="display: none;">
+                <h2>Bkash info</h2>
+
+                <div class="form-group">
+                    <label>Your Email</label>
+                    <input type="email" placeholder="Enter your email">
+                </div>
+
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" placeholder="Enter your name">
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter your password">
+                </div>
+
+                <div class="form-group">
+                    <label>Extra Info</label>
+                    <input type="text" placeholder="Any additional information">
+                </div>
+
+                <div class="payment-buttons">
+                <button id="submitPaymentBtn" class="submit-btn">Submit Payment</button>
+                <button id="cancelPaymentBtn" class="cancel-btn">Cancel</button>
+            </div>
+            </div>
+
+            <div id="nagad-form" class="payment-form" style="display: none;">
+                <h2>Nagod</h2>
+
+                <div class="form-group">
+                    <label>Your Email</label>
+                    <input type="email" placeholder="Enter your email">
+                </div>
+
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" placeholder="Enter your name">
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter your password">
+                </div>
+
+                <div class="form-group">
+                    <label>Extra Info</label>
+                    <input type="text" placeholder="Any additional information">
+                </div>
+
+                <div class="payment-buttons">
+                <button id="submitPaymentBtn" class="submit-btn">Submit Payment</button>
+                <button id="cancelPaymentBtn" class="cancel-btn">Cancel</button>
+            </div>
+            </div>
+
+
+
+            <div class="payment-disclaimer">
+                <p><em>Payment Disclaimer: In no event shall payment or partial payment by Owner for any material or
+                        service.</em></p>
+            </div>
+        </div>
+    </div>
 
     <section class="hero">
         <div class="hero-image-container">
@@ -125,13 +261,12 @@
             </div>
             <div class="footer-section">
                 <h3>Contact Us</h3>
-                <p>Email: info@greenmart.com</p>
-                <p>Phone: +1 234 567 890</p>
+                <p>Email: crack404websol@gmail.com</p>
+                <p>Phone: +880 1310 692122</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 Created by <a href="https://tahmid-haque-portfolio.netlify.app/">Tahmid Haque</a> | All right
-                resurved </p>
+            <p>&copy; 2025 Created by <a href="#">crack_404</a> | All rights reserved</p>
         </div>
     </footer>
 

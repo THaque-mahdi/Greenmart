@@ -2,25 +2,25 @@ document.addEventListener('DOMContentLoaded', function () {
     // DOM Elements
     const searchBtn = document.getElementById('search-btn');
     const cartBtn = document.getElementById('cart-btn');
-    const userBtn = document.getElementById('user-btn');
     const searchModal = document.getElementById('search-modal');
-    const userModal = document.getElementById('user-modal');
     const cartModal = document.getElementById('cart-modal');
     const closeButtons = document.querySelectorAll('.close');
-    const showSignup = document.getElementById('show-signup');
-    const showLogin = document.getElementById('show-login');
-    const loginForm = document.getElementById('login-form');
-    const signupForm = document.getElementById('signup-form');
-    const profileInfo = document.getElementById('profile-info');
-    const logoutBtn = document.getElementById('logout-btn');
     const addToCartButtons = document.querySelectorAll('.add-to-cart');
     const cartItemsContainer = document.getElementById('cart-items');
     const cartTotal = document.getElementById('cart-total');
     const emptyCartMessage = document.getElementById('empty-cart-message');
     const checkoutBtn = document.getElementById('checkout-btn');
+    const paymentModal = document.getElementById('paymentModal');
+    const cancelPaymentBtn = document.getElementById('cancelPaymentBtn');
+    const submitPaymentBtn = document.getElementById('submitPaymentBtn');
     const menu = document.querySelector("nav");
     const menuBtn = document.querySelector("#open-menu-btn");
     const closeBtn = document.querySelector("#close-menu-btn");
+
+    // State
+    let cart = [];
+
+    updateCartCount();
 
     // Mobile menu toggle
     menuBtn.addEventListener('click', () => {
@@ -35,28 +35,13 @@ document.addEventListener('DOMContentLoaded', function () {
         menuBtn.style.display = "inline-block";
     };
 
-    menuBtn.addEventListener('click', () => {
-        menu.style.display = "flex";
-    });
-
     closeBtn.addEventListener('click', closeNav);
 
-
-    // Close modal when clicking outside
-    // State
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-
-    updateCartCount();
-    checkUserStatus();
-
+    // Modal functionality
     searchBtn.addEventListener('click', () => searchModal.style.display = 'block');
     cartBtn.addEventListener('click', () => {
         renderCart();
         cartModal.style.display = 'block';
-    });
-    userBtn.addEventListener('click', () => {
-        userModal.style.display = 'block';
     });
 
     closeButtons.forEach(button => {
@@ -71,131 +56,19 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    showSignup.addEventListener('click', function (e) {
-        e.preventDefault();
-        loginForm.style.display = 'none';
-        signupForm.style.display = 'block';
-    });
-
-    showLogin.addEventListener('click', function (e) {
-        e.preventDefault();
-        signupForm.style.display = 'none';
-        loginForm.style.display = 'block';
-    });
-
-    document.getElementById('login-submit').addEventListener('click', loginUser);
-    document.getElementById('signup-submit').addEventListener('click', registerUser);
-    logoutBtn.addEventListener('click', logoutUser);
-
+    // Cart functionality
     addToCartButtons.forEach(button => {
         button.addEventListener('click', addToCart);
     });
 
     checkoutBtn.addEventListener('click', checkout);
 
-    
     function updateCartCount() {
         const count = cart.reduce((total, item) => total + item.quantity, 0);
         document.querySelector('.cart-count').textContent = count;
     }
-    
-    function checkUserStatus() {
-        if (currentUser) {
-            loginForm.style.display = 'none';
-            signupForm.style.display = 'none';
-            profileInfo.style.display = 'block';
-            document.getElementById('profile-name').textContent = currentUser.name;
-            document.getElementById('profile-email').textContent = currentUser.email;
-        } else {
-            loginForm.style.display = 'block';
-            signupForm.style.display = 'none';
-            profileInfo.style.display = 'none';
-        }
-    }
-
-    // User login and registration
-    function loginUser() {
-        const email = document.getElementById('login-email').value;
-        const password = document.getElementById('login-password').value;
-
-        // Simple validation
-        if (!email || !password) {
-            alert('Please fill in all fields');
-            return;
-        }
-
-        // In a real app, you would check against a database
-        const users = JSON.parse(localStorage.getItem('users')) || [];
-        const user = users.find(u => u.email === email && u.password === password);
-
-        if (user) {
-            currentUser = {
-                name: user.name,
-                email: user.email
-            };
-            localStorage.setItem('currentUser', JSON.stringify(currentUser));
-            checkUserStatus();
-            userModal.style.display = 'none';
-            alert('Login successful!');
-        } else {
-            alert('Invalid credentials');
-        }
-    }
-
-    function registerUser() {
-        const name = document.getElementById('signup-name').value;
-        const email = document.getElementById('signup-email').value;
-        const password = document.getElementById('signup-password').value;
-        const confirmPassword = document.getElementById('signup-confirm').value;
-
-        // Validation
-        if (!name || !email || !password || !confirmPassword) {
-            alert('Please fill in all fields');
-            return;
-        }
-
-        if (password !== confirmPassword) {
-            alert('Passwords do not match');
-            return;
-        }
-
-        // Check if user already exists
-        const users = JSON.parse(localStorage.getItem('users')) || [];
-        const userExists = users.some(u => u.email === email);
-
-        if (userExists) {
-            alert('User with this email already exists');
-            return;
-        }
-
-        // Add new user
-        users.push({
-            name,
-            email,
-            password // In a real app, you would hash the password
-        });
-
-        localStorage.setItem('users', JSON.stringify(users));
-        alert('Registration successful! Please login.');
-        signupForm.style.display = 'none';
-        loginForm.style.display = 'block';
-    }
-
-    function logoutUser() {
-        localStorage.removeItem('currentUser');
-        currentUser = null;
-        checkUserStatus();
-        userModal.style.display = 'none';
-        alert('Logged out successfully');
-    }
 
     function addToCart() {
-        if (!currentUser) {
-            alert('Please login to add items to cart');
-            userModal.style.display = 'block';
-            return;
-        }
-
         const productId = this.getAttribute('data-id');
         const productName = this.getAttribute('data-name');
         const productPrice = parseFloat(this.getAttribute('data-price'));
@@ -213,9 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
 
-        localStorage.setItem('cart', JSON.stringify(cart));
         updateCartCount();
-        alert(`${productName} added to cart!`);
     }
 
     function renderCart() {
@@ -280,7 +151,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Update quantity of items in the cart
     function updateQuantity(productId, change) {
         const itemIndex = cart.findIndex(item => item.id === productId);
 
@@ -291,38 +161,53 @@ document.addEventListener('DOMContentLoaded', function () {
                 cart.splice(itemIndex, 1);
             }
 
-            localStorage.setItem('cart', JSON.stringify(cart));
             updateCartCount();
             renderCart();
         }
     }
-    
+
     function removeItem(productId) {
         cart = cart.filter(item => item.id !== productId);
-        localStorage.setItem('cart', JSON.stringify(cart));
         updateCartCount();
         renderCart();
     }
-    
+
     function checkout() {
         if (cart.length === 0) {
             alert('Your cart is empty');
             return;
         }
-
-        if (!currentUser) {
-            alert('Please login to proceed to checkout');
-            userModal.style.display = 'block';
-            return;
-        }
-
-        // In a real app, you would process payment here
-        alert(`Order placed successfully! Total: $${document.getElementById('total-amount').textContent}`);
-        cart = [];
-        localStorage.removeItem('cart');
-        updateCartCount();
+        // Hide cart modal and show payment modal
         cartModal.style.display = 'none';
+        paymentModal.style.display = 'flex';
     }
+
+    // Add event listeners for payment modal
+    cancelPaymentBtn.addEventListener('click', () => {
+        paymentModal.style.display = 'none';
+    });
+
+    submitPaymentBtn.addEventListener('click', () => {
+        // Here you would normally process the payment
+        alert('Payment submitted successfully!');
+        cart = []; // Clear the cart
+        updateCartCount();
+        paymentModal.style.display = 'none';
+        cartModal.style.display = 'none';
+    });
+
+    // Update the selectMethod function to properly show forms
+    function selectMethod(method) {
+        const methods = ['visa', 'bkash', 'nagad'];
+        methods.forEach(m => {
+            const form = document.getElementById(`${m}-form`);
+            if (form) {
+                form.style.display = (m === method) ? 'block' : 'none';
+            }
+        });
+    }
+
+    window.selectMethod = selectMethod;
 });
 
 // FAQ Accordion
@@ -412,69 +297,3 @@ function checkSaleEnd() {
 // Check every hour if sale has ended
 setInterval(checkSaleEnd, 3600000);
 checkSaleEnd(); // Initial check
-
-
-
-// shop.js
-document.addEventListener('DOMContentLoaded', function () {
-    // Get all product items
-    const productItems = document.querySelectorAll('.product-item');
-    const searchInput = document.querySelector('.search-box input');
-    const categoryTabs = document.querySelectorAll('.category-tab');
-
-    // Search functionality
-    searchInput.addEventListener('input', function () {
-        const searchTerm = this.value.toLowerCase();
-
-        productItems.forEach(item => {
-            const productName = item.querySelector('.product-name').textContent.toLowerCase();
-            const productCategory = item.querySelector('.product-category').textContent.toLowerCase();
-
-            if (productName.includes(searchTerm) || productCategory.includes(searchTerm)) {
-                item.style.display = 'block';
-            } else {
-                item.style.display = 'none';
-            }
-        });
-    });
-
-    // Category filtering
-    categoryTabs.forEach(tab => {
-        tab.addEventListener('click', function () {
-            // Remove active class from all tabs
-            categoryTabs.forEach(t => t.classList.remove('active'));
-            // Add active class to clicked tab
-            this.classList.add('active');
-
-            const category = this.getAttribute('data-category');
-
-            productItems.forEach(item => {
-                const itemCategory = item.querySelector('.product-category').textContent.toLowerCase();
-
-                if (category === 'all' || itemCategory === category) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        });
-    });
-
-    // Reset filters button functionality (if you have one)
-    const resetFiltersBtn = document.getElementById('reset-filters');
-    if (resetFiltersBtn) {
-        resetFiltersBtn.addEventListener('click', function () {
-            // Clear search
-            searchInput.value = '';
-
-            // Set category to 'all'
-            categoryTabs.forEach(tab => tab.classList.remove('active'));
-            document.querySelector('.category-tab[data-category="all"]').classList.add('active');
-
-            // Show all products
-            productItems.forEach(item => {
-                item.style.display = 'block';
-            });
-        });
-    }
-});
