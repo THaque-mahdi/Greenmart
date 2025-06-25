@@ -60,7 +60,7 @@
         </div>
     </div>
 
-    <!-- Payment Method Modal -->
+     <!-- Payment Method Modal -->
     <div id="paymentModal" class="modal">
         <div class="modal-content payment-modal-content">
             <span class="close"><i class="fa-solid fa-circle-xmark"></i></span>
@@ -77,42 +77,37 @@
                 <h2>Visa Payment</h2>
 
                 <div class="form-group">
-                    <label>Your Email</label>
-                    <input type="email" placeholder="Enter your email">
+                    <label>Card Number</label>
+                    <input type="text" placeholder="1234 5678 9012 3456" pattern="[0-9]{13,16}" required>
                 </div>
 
                 <div class="form-group">
-                    <label>Your Name</label>
-                    <input type="text" placeholder="Enter your name">
+                    <label>Expiry Date</label>
+                    <input type="text" placeholder="MM/YY" pattern="(0[1-9]|1[0-2])\/[0-9]{2}" required>
                 </div>
 
                 <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" placeholder="Enter your password">
+                    <label>Cardholder Name</label>
+                    <input type="text" placeholder="As it appears on card" required>
                 </div>
 
                 <div class="form-group">
-                    <label>Extra Info</label>
-                    <input type="text" placeholder="Any additional information">
+                    <label>CVV</label>
+                    <input type="password" placeholder="123" pattern="[0-9]{3,4}" required>
                 </div>
 
                 <div class="payment-buttons">
-                <button id="submitPaymentBtn" class="submit-btn">Submit Payment</button>
-                <button id="cancelPaymentBtn" class="cancel-btn">Cancel</button>
-            </div>
+                    <button id="submitPaymentBtn" class="submit-btn">Submit Payment</button>
+                    <button id="cancelPaymentBtn" class="cancel-btn">Cancel</button>
+                </div>
             </div>
 
             <div id="bkash-form" class="payment-form" style="display: none;">
                 <h2>Bkash info</h2>
 
                 <div class="form-group">
-                    <label>Your Email</label>
-                    <input type="email" placeholder="Enter your email">
-                </div>
-
-                <div class="form-group">
-                    <label>Your Name</label>
-                    <input type="text" placeholder="Enter your name">
+                    <label>bKash Mobile Number</label>
+                    <input type="tel" placeholder="01XXXXXXXXX" pattern="01[3-9][0-9]{8}" required>
                 </div>
 
                 <div class="form-group">
@@ -121,43 +116,49 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Extra Info</label>
-                    <input type="text" placeholder="Any additional information">
+                    <label>bKash Transaction ID</label>
+                    <input type="text" placeholder="TRX123456789" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Order Reference</label>
+                    <input type="text" placeholder="Order#1234" readonly>
                 </div>
 
                 <div class="payment-buttons">
-                <button id="submitPaymentBtn" class="submit-btn">Submit Payment</button>
-                <button id="cancelPaymentBtn" class="cancel-btn">Cancel</button>
-            </div>
+                    <button id="submitPaymentBtn" class="submit-btn">Submit Payment</button>
+                    <button id="cancelPaymentBtn" class="cancel-btn">Cancel</button>
+                </div>
             </div>
 
             <div id="nagad-form" class="payment-form" style="display: none;">
                 <h2>Nagod</h2>
 
                 <div class="form-group">
-                    <label>Your Email</label>
-                    <input type="email" placeholder="Enter your email">
+                    <label>Nagad Mobile Number</label>
+                    <input type="tel" placeholder="01XXXXXXXXX" pattern="01[3-9][0-9]{8}" required>
                 </div>
 
-                <div class="form-group">
-                    <label>Your Name</label>
-                    <input type="text" placeholder="Enter your name">
-                </div>
-
+                
                 <div class="form-group">
                     <label>Password</label>
                     <input type="password" placeholder="Enter your password">
                 </div>
 
                 <div class="form-group">
-                    <label>Extra Info</label>
-                    <input type="text" placeholder="Any additional information">
+                    <label>Nagad Transaction ID</label>
+                    <input type="text" placeholder="NID123456789" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Order Reference</label>
+                    <input type="text" placeholder="Order#1234" readonly>
                 </div>
 
                 <div class="payment-buttons">
-                <button id="submitPaymentBtn" class="submit-btn">Submit Payment</button>
-                <button id="cancelPaymentBtn" class="cancel-btn">Cancel</button>
-            </div>
+                    <button id="submitPaymentBtn" class="submit-btn">Submit Payment</button>
+                    <button id="cancelPaymentBtn" class="cancel-btn">Cancel</button>
+                </div>
             </div>
 
 
