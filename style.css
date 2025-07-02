@@ -340,7 +340,7 @@ nav ul li a.active {
 
 /* Profile Page Styles */
 .profile-container {
-    max-width: 1200px;
+    width: 1200px;
     margin: 2rem auto;
     padding: 0 2rem;
 }
@@ -563,7 +563,7 @@ nav ul li a.active {
 .hero-content {
     position: relative;
     z-index: 2;
-    max-width: 800px;
+    width: 800px;
     text-align: center;
     padding: 2rem;
     background-color: rgba(0, 0, 0, 0.5);
@@ -763,7 +763,7 @@ nav ul li a.active {
 }
 
 .sale-container {
-    max-width: 1200px;
+    width: 1200px;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -819,7 +819,7 @@ nav ul li a.active {
     font-size: 1.2rem;
     margin-bottom: 2rem;
     opacity: 0.9;
-    max-width: 80%;
+    width: 80%;
 }
 
 .sale-countdown {
@@ -982,7 +982,7 @@ nav ul li a.active {
 
 /* Make sure payment modal is centered */
 #paymentModal .modal-content {
-    max-width: 600px;
+    width: 600px;
     width: 90%;
     margin: auto;
 }
@@ -1141,7 +1141,7 @@ nav ul li a.active {
     padding: 0.5rem 1rem;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     width: 100%;
-    max-width: 400px;
+    width: 400px;
 }
 
 .search-box input {
@@ -1314,7 +1314,7 @@ nav ul li a.active {
 
 .about-container {
     padding: 3rem 5%;
-    max-width: 1200px;
+    width: 1200px;
     margin: 0 auto;
 }
 
@@ -1408,7 +1408,7 @@ nav ul li a.active {
 
 .timeline-container {
     position: relative;
-    max-width: 800px;
+    width: 800px;
     margin: 0 auto;
     padding-left: 50px;
 }
@@ -1660,7 +1660,7 @@ footer {
 /* Footer end */
 
 /* Responsive Design start */
-@media (max-width: 1024px) {
+@media (width: 1024px) {
     .user-actions .button {
         display: inline-block;
         cursor: pointer;
@@ -1745,7 +1745,7 @@ footer {
 }
 
 
-@media (max-width: 768px) {
+@media (width: 768px) {
     nav {
         position: fixed;
         top: 4.5rem;
@@ -1783,7 +1783,7 @@ footer {
     }
 
     .hero-content {
-        max-width: 90%;
+        width: 90%;
     }
 
     .hero h2 {
@@ -1809,7 +1809,7 @@ footer {
     }
 
     .sale-subtitle {
-        max-width: 100%;
+        width: 100%;
     }
 
     .sale-countdown {
@@ -1884,7 +1884,7 @@ footer {
     }
 }
 
-@media (max-width: 480px) {
+@media (width: 480px) {
     header {
         display: flex;
         flex-direction: column;
@@ -2042,7 +2042,7 @@ footer {
     }
 
     .search-box {
-        max-width: 100%;
+        width: 100%;
     }
 
     .products-grid {
